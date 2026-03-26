@@ -95,7 +95,7 @@ export default function MenuPage() {
 
   const fetchMenus = async () => {
     try {
-      const res = await fetch("http://localhost:3000/menu");
+      const res = await fetch("https://menutask-bk.onrender.com/menu");
       const data = await res.json();
       
       const transformedMenus = data.map((menu:any)=>({
@@ -236,7 +236,7 @@ export default function MenuPage() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/menu", {
+      const res = await fetch("https://menutask-bk.onrender.com/menu", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -274,7 +274,7 @@ export default function MenuPage() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/menu/item", {
+      const res = await fetch("https://menutask-bk.onrender.com/menu/item", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -341,7 +341,7 @@ export default function MenuPage() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/menu/submenu", {
+      const res = await fetch("https://menutask-bk.onrender.commenu/submenu", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
