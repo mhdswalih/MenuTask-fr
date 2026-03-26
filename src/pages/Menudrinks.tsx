@@ -86,7 +86,7 @@ export default function MenuPage() {
 
   // State for menus
   const [menus, setMenus] = useState<Menu[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [_loading, setLoading] = useState(true);
 
   // Fetch menus on component mount
   useEffect(() => {
