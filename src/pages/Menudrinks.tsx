@@ -539,13 +539,13 @@ export default function MenuPage() {
     );
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#0e0e0e] flex items-center justify-center">
-        <div className="text-white font-oswald text-xl">Loading menu...</div>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="min-h-screen bg-[#0e0e0e] flex items-center justify-center">
+  //       <div className="text-white font-oswald text-xl">Loading menu...</div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div
