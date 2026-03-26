@@ -341,7 +341,7 @@ export default function MenuPage() {
     }
 
     try {
-      const res = await fetch("https://menutask-bk.onrender.com/submenu", {
+      const res =await fetch("https://menutask-bk.onrender.com/menu", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
