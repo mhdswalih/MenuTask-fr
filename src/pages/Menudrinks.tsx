@@ -983,7 +983,7 @@ export default function MenuPage() {
               backgroundPosition: 'center'
             }}
           >
-            <div className="absolute inset-0 bg-black/90"></div>
+            <div className="absolute inset-0 bg-black/80"></div>
           </div>
 
           {/* TAB SECTION - Menu tabs with Add Menu button outside */}
@@ -1049,9 +1049,9 @@ export default function MenuPage() {
 
       {/* ── FOOTER ── */}
       <footer className="bg-[#0a0a0a] pt-6 sm:pt-8 md:pt-10 pb-0">
-        <div className="max-w-[1200px] mx-auto px-3 sm:px-4 md:px-5 lg:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 pb-6 sm:pb-8 md:pb-10">
+        <div className="max-w-[1300px] mx-auto px-3 sm:px-4 md:px-5 lg:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-5 md:gap-6 pb-6 sm:pb-8 md:pb-10">
           {/* Connect */}
-          <div className="border border-[#c5a059] rounded-[15px] py-4 px-4 sm:py-5 sm:px-5 md:py-5 md:px-6 flex flex-col items-center gap-2">
+          <div className="border border-[#c5a059] rounded-[15px] py-4 px-4 sm:py-5 sm:px-5 md:py-5 md:px-6 flex flex-col items-center gap-5">
             <p className="font-oswald text-[#c5a059] uppercase text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px] tracking-widest mb-1">
               Connect with Us
             </p>
