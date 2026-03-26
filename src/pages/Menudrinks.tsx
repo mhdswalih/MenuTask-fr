@@ -31,7 +31,7 @@ const iconEmail = "https://www.figma.com/api/mcp/asset/5b4f93e1-ef71-4964-9b56-e
 const iconPin = "https://www.figma.com/api/mcp/asset/fb6c3872-48b9-4d37-a51f-bc245b786761";
 const iconInstagram = "https://www.figma.com/api/mcp/asset/f143a4df-41dd-4c6d-8bb6-92531ee1186d";
 
-type TabType = string;
+
 
 interface MenuItem {
   id: string;
