@@ -99,34 +99,20 @@ export default function MenuPage() {
       const data = await res.json();
       
       const transformedMenus = data.map((menu:any)=>({
-
- id: menu.id,
-
- name: menu.name.toUpperCase(),
-
- items: menu.items || [],
-
- sideMenus: menu.children?.map((sub:any)=>({
-
-  id: sub.id,
-
-  name: sub.name.toUpperCase(),
-
-  description: sub.description || "",
-
-  items: sub.items || [],
-
-  badgeColor: "bg-[#d25858]",
-
-  textShadow: "text-shadow-red",
-
-  image: imgSaladPlate
-
- })) || [],
-
- decorationType: "salad"
-
-}))
+        id: menu.id,
+        name: menu.name.toUpperCase(),
+        items: menu.items || [],
+        sideMenus: menu.children?.map((sub:any)=>({
+          id: sub.id,
+          name: sub.name.toUpperCase(),
+          description: sub.description || "",
+          items: sub.items || [],
+          badgeColor: "bg-[#d25858]",
+          textShadow: "text-shadow-red",
+          image: imgSaladPlate
+        })) || [],
+        decorationType: "salad"
+      }))
       setMenus(transformedMenus);
       if (transformedMenus.length > 0) {
         setActiveTab(transformedMenus[0].id);
@@ -539,14 +525,6 @@ export default function MenuPage() {
     );
   };
 
-  // if (loading) {
-  //   return (
-  //     <div className="min-h-screen bg-[#0e0e0e] flex items-center justify-center">
-  //       <div className="text-white font-oswald text-xl">Loading menu...</div>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div
       className="relative min-h-screen w-full bg-[#0e0e0e] overflow-x-hidden"
@@ -612,8 +590,36 @@ export default function MenuPage() {
           padding: 30px;
           max-width: 500px;
           width: 90%;
+          max-height: 90vh;
+          display: flex;
+          flex-direction: column;
           animation: slideUp 0.3s ease;
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-body {
+          flex: 1;
+          overflow-y: auto;
+          padding-right: 5px;
+          margin-right: -5px;
+        }
+        
+        .modal-body::-webkit-scrollbar {
+          width: 6px;
+        }
+        
+        .modal-body::-webkit-scrollbar-track {
+          background: #2a2a2a;
+          border-radius: 3px;
+        }
+        
+        .modal-body::-webkit-scrollbar-thumb {
+          background: #c5a059;
+          border-radius: 3px;
+        }
+        
+        .modal-body::-webkit-scrollbar-thumb:hover {
+          background: #e6b450;
         }
         
         .modal-content input,
@@ -672,7 +678,9 @@ export default function MenuPage() {
               <h3 className="font-oswald text-white text-2xl uppercase tracking-wider mb-4">
                 Add New {modalType === "menu" ? "Menu" : modalType === "sidemenu" ? "Side Menu" : "Item"}
               </h3>
-
+            </div>
+            
+            <div className="modal-body">
               {modalType === "menu" && (
                 <>
                   <div className="mb-4 text-left">
@@ -734,7 +742,7 @@ export default function MenuPage() {
                     <label className="font-oswald text-white/80 text-sm uppercase tracking-wider mb-2 block">
                       Side Menu Image
                     </label>
-                    <div className="flex flex-wrap gap-2 mb-3">
+                    <div className="flex flex-wrap gap-2 mb-3 max-h-32 overflow-y-auto p-1">
                       {[
                         { name: "Salad Plate", value: imgSaladPlate },
                         { name: "Shrimp", value: iconShrimp },
@@ -787,7 +795,7 @@ export default function MenuPage() {
                       <option value="bg-[#c5a059]">Gold (#c5a059)</option>
                     </select>
                   </div>
-                  <div className="mb-6 text-left">
+                  <div className="mb-4 text-left">
                     <label className="font-oswald text-white/80 text-sm uppercase tracking-wider mb-2 block">
                       Text Shadow
                     </label>
@@ -832,7 +840,7 @@ export default function MenuPage() {
                       className="w-full"
                     />
                   </div>
-                  <div className="mb-6 text-left">
+                  <div className="mb-4 text-left">
                     <label className="font-oswald text-white/80 text-sm uppercase tracking-wider mb-2 block">
                       Description
                     </label>
@@ -846,21 +854,21 @@ export default function MenuPage() {
                   </div>
                 </>
               )}
+            </div>
 
-              <div className="flex gap-3">
-                <button
-                  onClick={closeModal}
-                  className="flex-1 bg-transparent border border-[#c5a059] text-[#c5a059] py-2 rounded-lg hover:bg-[#c5a059]/10 transition-colors font-oswald uppercase text-sm tracking-wider"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleSubmit}
-                  className="flex-1 bg-[#c5a059] text-white py-2 rounded-lg hover:bg-[#b58a3f] transition-colors font-oswald uppercase text-sm tracking-wider"
-                >
-                  Add {modalType === "menu" ? "Menu" : modalType === "sidemenu" ? "Side Menu" : "Item"}
-                </button>
-              </div>
+            <div className="flex gap-3 mt-4 pt-4 border-t border-[#c5a059]/30">
+              <button
+                onClick={closeModal}
+                className="flex-1 bg-transparent border border-[#c5a059] text-[#c5a059] py-2 rounded-lg hover:bg-[#c5a059]/10 transition-colors font-oswald uppercase text-sm tracking-wider"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSubmit}
+                className="flex-1 bg-[#c5a059] text-white py-2 rounded-lg hover:bg-[#b58a3f] transition-colors font-oswald uppercase text-sm tracking-wider"
+              >
+                Add {modalType === "menu" ? "Menu" : modalType === "sidemenu" ? "Side Menu" : "Item"}
+              </button>
             </div>
           </div>
         </div>
