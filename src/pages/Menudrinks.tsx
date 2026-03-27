@@ -97,12 +97,12 @@ export default function MenuPage() {
     try {
       const res = await fetch("https://menutask-bk.onrender.com/menu");
       const data = await res.json();
-      
-      const transformedMenus = data.map((menu:any)=>({
+
+      const transformedMenus = data.map((menu: any) => ({
         id: menu.id,
         name: menu.name.toUpperCase(),
         items: menu.items || [],
-        sideMenus: menu.children?.map((sub:any)=>({
+        sideMenus: menu.children?.map((sub: any) => ({
           id: sub.id,
           name: sub.name.toUpperCase(),
           description: sub.description || "",
@@ -327,7 +327,7 @@ export default function MenuPage() {
     }
 
     try {
-      const res =await fetch("https://menutask-bk.onrender.com/menu", {
+      const res = await fetch("https://menutask-bk.onrender.com/menu", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -380,92 +380,246 @@ export default function MenuPage() {
   };
 
   const renderDecoration = (menu: Menu) => {
-    if (menu.decorationType === "salad") {
-      return (
-        <div className="relative mt-20 pl-3 sm:pl-4 pb-2">
-          <img src={imgSaladBottom} alt=""
-            className="relative md:absolute md:-left-10 md:-bottom-10 w-[80px] sm:w-[100px] md:w-[140px] lg:w-[180px] h-[50px] sm:h-[60px] md:h-[100px] lg:h-[120px] object-cover rounded shadow-lg z-10" />
-        </div>
-      );
-    } else if (menu.decorationType === "drinks") {
-      return (
-        <div className="relative mt-20 pl-3 sm:pl-4 pb-2">
-          <img src={iconChampagneL} alt=""
-            className="relative md:absolute md:-left-10 md:-bottom-10 w-[60px] sm:w-[80px] md:w-[110px] lg:w-[140px] h-[60px] sm:h-[80px] md:h-[110px] lg:h-[140px] object-contain opacity-50 z-10" />
-        </div>
-      );
-    } else if (menu.decorationType === "brunch") {
-      return (
-        <div className="relative mt-20 pl-3 sm:pl-4 pb-2">
-          <img src={iconSpatula} alt=""
-            className="relative md:absolute md:-left-10 md:-bottom-10 w-[60px] sm:w-[80px] md:w-[110px] lg:w-[140px] h-[60px] sm:h-[80px] md:h-[110px] lg:h-[140px] object-contain opacity-50 z-10" />
-        </div>
-      );
-    }
-    return null;
-  };
 
+  if (menu.decorationType === "salad") {
+
+    return (
+
+      <div className="relative mt-20 pl-3 sm:pl-4 pb-2">
+
+        <img
+          src={imgSaladBottom}
+          alt=""
+          className="
+
+            /* MOBILE */
+            relative
+            left-5
+            right-60           /* moved more right */
+            w-[130px]         /* slightly bigger */
+            h-[90px]
+
+            /* DESKTOP unchanged */
+            md:absolute
+            md:-left-10
+            md:-bottom-10
+            md:w-[140px]
+            lg:w-[180px]
+            md:h-[100px]
+            lg:h-[120px]
+
+            object-cover
+            rounded
+            shadow-lg
+            z-10
+          "
+        />
+
+      </div>
+
+    );
+
+  }
+
+  return null;
+
+};
   const renderSideMenu = (sideMenu: SideMenu, parentMenu: Menu) => {
     return (
-      <div key={sideMenu.id} className="mt-4 sm:mt-6 mx-3 sm:mx-4 md:mx-6 lg:mx-8 md:ml-20 lg:ml-30 border border-dashed border-white/50 rounded-sm">
-        <div className="flex flex-col sm:flex-row min-h-auto sm:min-h-[180px]">
-          <div className="flex flex-col items-center justify-center w-full sm:w-[250px] lg:w-[280px] sm:shrink-0 gap-2 py-4 sm:py-5 border-b sm:border-b-0">
-            <div className={`${sideMenu.badgeColor} px-4 sm:px-5 md:px-6 py-1.5 sm:py-2`}>
-              <span className="font-oswald text-white font-bold text-[22px] sm:text-[28px] md:text-[32px] lg:text-[36px] uppercase tracking-[1.5px]"
-                style={{ textShadow: sideMenu.textShadow }}>
+      <div
+        key={sideMenu.id}
+        className="
+        relative
+        mt-12 sm:mt-6
+        mx-3 sm:mx-4 md:mx-6 lg:mx-8
+        md:ml-20 lg:ml-30
+        border border-dashed border-white/50 rounded-sm
+
+        pt-20 sm:pt-0
+      "
+      >
+
+        {/* MOBILE FLOATING IMAGE */}
+        {sideMenu.image && (
+          <img
+            src={sideMenu.image}
+            alt={sideMenu.name}
+            className="
+            absolute
+            left-1/2 -translate-x-1/2
+            -top-16
+
+            w-[140px]
+            h-[140px]
+
+            object-contain
+            z-20
+
+            sm:hidden
+          "
+          />
+        )}
+
+        <div className="flex flex-col sm:flex-row sm:min-h-[180px]">
+
+          {/* TITLE SECTION */}
+          <div
+            className="
+            flex flex-col items-center justify-center
+            w-full sm:w-[250px] lg:w-[280px]
+            gap-2
+            py-5 sm:py-5
+            border-b sm:border-b-0
+            text-center
+          "
+          >
+
+            <div className={`${sideMenu.badgeColor} px-4 sm:px-5 md:px-6 py-2`}>
+              <span
+                className="
+                font-oswald text-white font-bold
+                text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px]
+                uppercase tracking-[1.5px]
+              "
+                style={{ textShadow: sideMenu.textShadow }}
+              >
                 {sideMenu.name}
               </span>
             </div>
+
             {sideMenu.description && (
-              <span className="font-kelly text-white/60 text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px] mt-1 text-center">
+              <span
+                className="
+                font-kelly text-white/60
+                text-[13px] sm:text-[13px] md:text-[14px]
+              "
+              >
                 {sideMenu.description}
               </span>
             )}
-            <button
-              onClick={() => openSideMenuItemModal(parentMenu, sideMenu)}
-              className="mt-2 flex items-center gap-1 text-xs text-[#c5a059] hover:text-[#e6b450] transition-colors font-oswald uppercase"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-              Add Item
-            </button>
+
           </div>
 
-          <div className="hidden sm:block h-30 mt-8 w-px bg-white/30 self-stretch" />
+          {/* DESKTOP DIVIDER */}
+          <div className="hidden sm:block w-px bg-white/30 self-stretch my-8" />
 
-          <div className="flex-1 flex flex-col justify-center gap-2 sm:gap-3 md:gap-4 px-4 sm:px-6 md:px-8 lg:px-10 py-4 sm:py-5 md:py-6">
+          {/* ITEMS SECTION */}
+          <div
+            className="
+            flex-1 flex flex-col justify-center
+            items-center sm:items-start
+            gap-3
+            px-4 sm:px-6 md:px-8 lg:px-10
+            py-6
+            text-center sm:text-left
+          "
+          >
+
             {sideMenu.items.map((item) => (
-              <div key={item.id} className="cursor-pointer hover:bg-white/5 transition-colors rounded p-1">
-                <p className="font-oswald text-white text-[13px] sm:text-[15px] md:text-[16px] lg:text-[18px] uppercase tracking-[0.5px] font-normal break-words">
-                  {item.name}{item.price ? `...............................${item.price}` : ''}
+              <div
+                key={item.id}
+                className="
+                w-full max-w-[420px]
+                hover:bg-white/5
+                transition-colors
+                rounded p-1
+              "
+              >
+
+                <p
+                  className="
+                  font-oswald text-white
+                  text-[15px] sm:text-[16px] md:text-[18px]
+                  uppercase tracking-[0.5px]
+                "
+                >
+                  {item.name}
+                  {item.price && `................${item.price}`}
                 </p>
+
                 {item.desc && (
-                  <p className="font-kelly text-white/60 text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] mt-0 leading-snug whitespace-pre-line">
+                  <p
+                    className="
+                    font-kelly text-white/60
+                    text-[13px]
+                    leading-snug
+                  "
+                  >
                     {item.desc}
                   </p>
                 )}
+
               </div>
             ))}
-            {sideMenu.items.length === 0 && (
-              <p className="font-kelly text-white/40 text-center py-4">No items yet. Click "Add Item" to add items.</p>
-            )}
+
+            {/* ADD ITEM BUTTON */}
+            <button
+              onClick={() =>
+                openSideMenuItemModal(parentMenu, sideMenu)
+              }
+              className="
+              mt-2
+              flex items-center gap-1
+              text-[#c5a059]
+              hover:text-[#e6b450]
+              font-oswald uppercase
+              text-sm
+            "
+            >
+
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+
+              Add Item
+
+            </button>
+
           </div>
 
+          {/* DESKTOP IMAGE (OLD POSITION) */}
           {sideMenu.image && (
-            <div className="order-first sm:order-last flex justify-center items-center pr-13 w-full sm:w-[220px] md:w-[260px] lg:w-[300px] sm:shrink-0 pb-3 sm:pb-0">
-              <img src={sideMenu.image} alt={sideMenu.name}
-                className="mx-auto w-[150px] sm:w-[180px] md:w-[220px] lg:w-[260px] object-cover" />
+            <div
+              className="
+              hidden sm:flex
+              justify-center items-center
+              w-[220px] md:w-[260px] lg:w-[300px]
+              pb-3 sm:pb-0
+            "
+            >
+
+              <img
+                src={sideMenu.image}
+                alt={sideMenu.name}
+                className="
+                w-[180px]
+                md:w-[220px]
+                lg:w-[260px]
+                object-cover
+              "
+              />
+
             </div>
           )}
+
         </div>
+
       </div>
     );
   };
-
   const renderMenuContent = (menu: Menu) => {
     return (
-      <div key={menu.id} className="relative border border-[#c5a059] rounded-sm">
+      <div key={menu.id} className="relative border border-[#c5a059] rounded-sm w-full">
         <div className="flex justify-center mt-10 gap-4">
           <button
             onClick={() => openItemModal(menu)}
@@ -488,6 +642,7 @@ export default function MenuPage() {
         </div>
 
         <div className="flex flex-col md:flex-row min-h-auto md:min-h-[380px]">
+          {/* Title section */}
           <div className="flex flex-row md:flex-col items-center justify-between md:justify-center w-full md:w-[250px] lg:w-[280px] md:shrink-0 border-b md:border-b-0 md:border-r py-3 md:py-0 px-4 md:px-0">
             <img src={imgAppetizer} alt="Appetizer" className="w-[70px] h-[70px] sm:w-[80px] sm:h-[80px] md:hidden object-cover rounded shadow-xl z-20" />
             <h2 className="font-oswald text-white font-bold text-[24px] sm:text-[28px] md:text-[38px] lg:text-[44px] uppercase tracking-[1.5px] text-shadow-red text-center mt-0 md:ml-30 md:mt-30 md:mb-60 px-2 md:px-4">
@@ -500,14 +655,15 @@ export default function MenuPage() {
 
           <div className="hidden md:block md:ml-30 bg-gray-500 w-0.5 md:mt-30 h-auto my-8"></div>
 
+          {/* Items section - centered on mobile */}
           <div className="flex-1 md:ml-30 md:mt-10 flex flex-col justify-center gap-2 sm:gap-5 md:gap-6 px-4 sm:px-6 md:px-8 lg:px-10 py-2 md:py-8 lg:py-10">
             {menu.items.map((item) => (
-              <div key={item.id} className="mb-0 sm:mb-1">
-                <p className="appetizer-name font-oswald text-white text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] uppercase tracking-[0.5px] sm:tracking-[0.6px] font-normal leading-tight break-words">
+              <div key={item.id} className="mb-0 sm:mb-1 w-full">
+                <p className="appetizer-name font-oswald text-white text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] uppercase tracking-[0.5px] sm:tracking-[0.6px] font-normal leading-tight break-words text-center md:text-left">
                   {item.name}{item.price ? `...............................${item.price}` : ''}
                 </p>
                 {item.desc && (
-                  <p className="font-kelly text-white/60 text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] mt-0 leading-snug whitespace-pre-line">
+                  <p className="font-kelly text-white/60 text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] mt-0 leading-snug whitespace-pre-line text-center md:text-left">
                     {item.desc}
                   </p>
                 )}
@@ -679,7 +835,7 @@ export default function MenuPage() {
                 Add New {modalType === "menu" ? "Menu" : modalType === "sidemenu" ? "Side Menu" : "Item"}
               </h3>
             </div>
-            
+
             <div className="modal-body">
               {modalType === "menu" && (
                 <>
@@ -764,8 +920,8 @@ export default function MenuPage() {
                           type="button"
                           onClick={() => setFormData({ ...formData, sideMenuImage: option.value })}
                           className={`px-3 py-1.5 rounded-md text-xs font-oswald uppercase transition-all ${formData.sideMenuImage === option.value
-                              ? "bg-[#c5a059] text-white"
-                              : "bg-[#2a2a2a] text-white/70 hover:bg-[#c5a059]/30 border border-[#c5a059]/50"
+                            ? "bg-[#c5a059] text-white"
+                            : "bg-[#2a2a2a] text-white/70 hover:bg-[#c5a059]/30 border border-[#c5a059]/50"
                             }`}
                         >
                           {option.name}
@@ -979,7 +1135,7 @@ export default function MenuPage() {
               style={{ top: `${top}px`, width: `${width}px`, height: `${width}px` }} />
           ))}
         </div>
-        
+
         <div className="relative mb-8 sm:mb-10 md:mb-12 -mx-3 sm:-mx-4 md:-mx-5 lg:-mx-6">
           {/* Background Image - with repeat pattern */}
           <div
